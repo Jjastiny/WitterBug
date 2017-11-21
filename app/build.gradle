@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+//apply plugin: 'com.android.library'
+apply plugin: 'idea'
 
 android {
     compileSdkVersion 26
@@ -8,7 +10,12 @@ android {
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "com.isymobilegames.witterbug.BaseTestRunner"
+        testInstrumentationRunner "com.isymobilegames.witterbug.base.BaseTestRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath true
+            }
+        }
     }
     buildTypes {
         release {
@@ -20,6 +27,27 @@ android {
         targetCompatibility 1.8
         sourceCompatibility 1.8
     }
+    sourceSets{
+        def testCommonDir = "src/commonTest/java"
+        androidTest.java.srcDirs += testCommonDir
+        test.java.srcDirs += testCommonDir
+    }
+}
+
+android.testVariants.all {variant ->
+    if (variant.buildType.name == "debug") {
+        def aptOutputDir = new File(buildDir, "generated/source/apt/${variant.testedVariant.dirName}")
+        variant.testedVariant.addJavaSourceFoldersToModel(aptOutputDir)
+        assembleDebug.finalizedBy('assembleDebugAndroidTest')
+    }
+}
+
+android.applicationVariants.all { variant ->
+    if (variant.buildType.name == "debug") {
+        def aptOutputDir = new File(buildDir, "generated/source/apt/${variant.unitTestVariant.dirName}")
+        variant.unitTestVariant.addJavaSourceFoldersToModel(aptOutputDir)
+        assembleDebug.finalizedBy('assembleDebugUnitTest')
+    }
 }
 
 dependencies {
@@ -29,8 +57,16 @@ dependencies {
     })
 
     //Dagger 2
-    compile 'com.google.dagger:dagger:2.7'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.7'
+
+
+    implementation 'com.google.dagger:dagger:2.11'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
+
+    androidTestImplementation 'com.google.dagger:dagger:2.11'
+    androidTestAnnotationProcessor 'com.google.dagger:dagger-compiler:2.11'
+
+    testImplementation 'com.google.dagger:dagger:2.11'
+    testAnnotationProcessor 'com.google.dagger:dagger-compiler:2.11'
 
     //Retrofit
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
@@ -58,4 +94,7 @@ dependencies {
     testCompile 'org.mockito:mockito-core:2.7.22'
     androidTestCompile 'org.mockito:mockito-android:2.7.22'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
+    androidTestCompile 'com.android.support:support-annotations:24.0.0'
+    androidTestCompile 'com.android.support.test:runner:0.5'
+
 }
