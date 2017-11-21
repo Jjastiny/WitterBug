@@ -1,6 +1,5 @@
 package com.isymobilegames.witterbug.dagger.module;
 
-import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.isymobilegames.witterbug.dagger.scope.AuthScope;
@@ -40,21 +39,15 @@ public class AuthenticatedRetrofitModule {
 
   @Provides
   @Singleton
-  OkHttpClient providesOAuthOkHttpClient(OkHttpOAuthConsumer consumer) {
+  OkHttpClient providesOAuthOkHttpClient(Preferences preferences) {
+    OkHttpOAuthConsumer consumer = new OkHttpOAuthConsumer(CONSUMER_KEY, CONSUMER_SECRET);
+    consumer.setTokenWithSecret(preferences.getToken(), preferences.getTokenSecret());
     HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
     httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
     return new OkHttpClient.Builder()
         .addInterceptor(httpLoggingInterceptor)
         .addInterceptor(new SigningInterceptor(consumer))
         .build();
-  }
-
-  @Provides
-  @Singleton
-  OkHttpOAuthConsumer provideOkHttpOAuthConsumer(Preferences preferences) {
-    OkHttpOAuthConsumer consumer = new OkHttpOAuthConsumer(CONSUMER_KEY, CONSUMER_SECRET);
-    consumer.setTokenWithSecret(preferences.getToken(), preferences.getTokenSecret());
-    return consumer;
   }
 
   @Provides
