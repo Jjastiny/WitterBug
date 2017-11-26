@@ -28,7 +28,6 @@ import se.akerfeldt.okhttp.signpost.SigningInterceptor;
 
 /** Created by justinyang on 11/15/17. */
 @Module
-@AuthScope
 public class AuthenticatedRetrofitModule {
 
   private static final String BASE_URL = "https://api.twitter.com/1.1/";
