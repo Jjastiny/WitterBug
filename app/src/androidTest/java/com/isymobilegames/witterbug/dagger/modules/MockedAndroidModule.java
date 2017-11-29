@@ -1,4 +1,4 @@
-package com.isymobilegames.witterbug.dagger.module;
+package com.isymobilegames.witterbug.dagger.modules;
 
 import android.content.Context;
 

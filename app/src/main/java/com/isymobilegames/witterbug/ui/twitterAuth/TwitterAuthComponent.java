@@ -4,7 +4,12 @@ import dagger.Subcomponent;
 
 /** Created by justinyang on 11/15/17. */
 @TwitterAuthScope
-@Subcomponent(modules = {TwitterAuthModule.class})
+@Subcomponent()
 public interface TwitterAuthComponent {
-  void inject(TwitterAuthActivity twitterAuthActivity);
+  TwitterAuthPresenter twitterAuthPresenter();
+
+  @Subcomponent.Builder
+  interface Builder {
+    TwitterAuthComponent build();
+  }
 }

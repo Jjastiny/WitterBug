@@ -1,7 +1,6 @@
 package com.isymobilegames.witterbug;
 
-import com.isymobilegames.witterbug.dagger.CoreComponent;
-import com.isymobilegames.witterbug.dagger.DaggerCoreComponent;
+import com.isymobilegames.witterbug.dagger.components.CoreComponent;
 
 /** Created by justinyang on 11/17/17. */
 public class WitterBugTestApplication extends WitterBugApplication {

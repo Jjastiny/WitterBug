@@ -1,7 +1,7 @@
 package com.isymobilegames.witterbug.base;
 
 import com.isymobilegames.witterbug.dagger.ComponentHolder;
-import com.isymobilegames.witterbug.dagger.CoreComponent;
+import com.isymobilegames.witterbug.dagger.components.CoreComponent;
 
 import org.junit.After;
 import org.junit.Before;

@@ -1,6 +1,5 @@
 package com.isymobilegames.witterbug.dagger.modules;
 
-
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -34,9 +33,4 @@ public class MockedRetrofitModule {
     return mock(OAuthProvider.class);
   }
 
-  @Provides
-  @Singleton
-  Retrofit providesAuthedRetrofit() {
-    return mock(Retrofit.class);
-  }
 }

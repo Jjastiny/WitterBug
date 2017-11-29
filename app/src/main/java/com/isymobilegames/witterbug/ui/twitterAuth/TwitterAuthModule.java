@@ -13,9 +13,9 @@ import oauth.signpost.OAuthProvider;
 @Module
 public class TwitterAuthModule {
 
-  @Provides
-  TwitterAuthPresenter providesTwitterAuthPresenter(
-      Preferences preferences, OAuthConsumer consumer, OAuthProvider provider) {
-    return new TwitterAuthPresenter(preferences, consumer, provider);
-  }
+//  @Provides
+//  TwitterAuthPresenter providesTwitterAuthPresenter(
+//      Preferences preferences, OAuthConsumer consumer, OAuthProvider provider) {
+//    return new TwitterAuthPresenter(preferences, consumer, provider);
+//  }
 }

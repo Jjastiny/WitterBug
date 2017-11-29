@@ -23,6 +23,7 @@
 
         <activity android:name=".ui.MainActivity"/>
 
+        <activity android:name="com.isymobilegames.witterbug.ui.base.TestActivity"/>
     </application>
 
 </manifest>

@@ -6,6 +6,8 @@ import android.support.annotation.VisibleForTesting;
 import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter;
 import com.isymobilegames.witterbug.util.Preferences;
 
+import javax.inject.Inject;
+
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -14,6 +16,7 @@ import oauth.signpost.OAuthConsumer;
 import oauth.signpost.OAuthProvider;
 
 /** Created by justinyang on 11/15/17. */
+@TwitterAuthScope
 public class TwitterAuthPresenter extends MvpBasePresenter<TwitterAuthView> {
 
   private static final String TAG = TwitterAuthPresenter.class.getSimpleName();
@@ -25,6 +28,7 @@ public class TwitterAuthPresenter extends MvpBasePresenter<TwitterAuthView> {
 
   @VisibleForTesting() CompositeDisposable compositeDisposable = new CompositeDisposable();
 
+  @Inject
   public TwitterAuthPresenter(
       Preferences preferences, OAuthConsumer consumer, OAuthProvider provider) {
     this.preferences = preferences;

@@ -1,4 +1,4 @@
-package com.isymobilegames.witterbug.dagger.module;
+package com.isymobilegames.witterbug.dagger.modules;
 
 import com.isymobilegames.witterbug.rest.BaseService;
 
